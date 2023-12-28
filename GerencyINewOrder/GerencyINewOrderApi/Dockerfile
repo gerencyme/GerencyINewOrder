@@ -1,36 +1,26 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-
-ENV ASPNETCORE_URLS=http://+:8000;http://+:80
-ENV ASPNETCORE_ENVIRONMENT=Development
-
+# Estágio 1: Construção da aplicação
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-# Copie os arquivos de projeto para evitar copiar todo o diretório '.' desnecessariamente
-COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
-COPY ["GerencyINewOrder/Domain/Domain.csproj", "Domain/"]
-COPY ["GerencyINewOrder/Entities/Entities.csproj", "Entities/"]
-COPY ["GerencyINewOrder/Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+# Copiar os arquivos de projeto
+COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Entities/Entities.csproj", "Entities/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 
-# Restaurar dependências
+# Restaurar dependências e compilar
 RUN dotnet restore
-
-# Copiar todo o restante do código
 COPY . .
-
-# Build do projeto
 RUN dotnet build "GerencyINewOrderApi.csproj" -c Release -o /app/build
 
+# Estágio 2: Publicação da aplicação
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-
-# Publicação do projeto
 RUN dotnet publish "GerencyINewOrderApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM base AS final
+# Estágio 3: Configuração final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 WORKDIR /app
+EXPOSE 80
 
 # Copiar os artefatos da publicação
 COPY --from=publish /app/publish .
