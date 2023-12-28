@@ -1,28 +1,28 @@
-# Est·gio 1: ConstruÁ„o da aplicaÁ„o
+# Est√°gio 1: Constru√ß√£o da aplica√ß√£o
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
 # Copiar os arquivos de projeto
-COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
-COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["Entities/Entities.csproj", "Entities/"]
-COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["GerencyINewOrderApi/*.csproj", "GerencyINewOrderApi/"]
+COPY ["Domain/*.csproj", "Domain/"]
+COPY ["Entities/*.csproj", "Entities/"]
+COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 
-# Restaurar dependÍncias e compilar
+# Restaurar depend√™ncias e compilar
 RUN dotnet restore
 COPY . .
 RUN dotnet build "GerencyINewOrderApi.csproj" -c Release -o /app/build
 
-# Est·gio 2: PublicaÁ„o da aplicaÁ„o
+# Est√°gio 2: Publica√ß√£o da aplica√ß√£o
 FROM build AS publish
 RUN dotnet publish "GerencyINewOrderApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Est·gio 3: ConfiguraÁ„o final
+# Est√°gio 3: Configura√ß√£o final
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 WORKDIR /app
 EXPOSE 80
 
-# Copiar os artefatos da publicaÁ„o
+# Copiar os artefatos da publica√ß√£o
 COPY --from=publish /app/publish .
 
 # Comando de entrada
