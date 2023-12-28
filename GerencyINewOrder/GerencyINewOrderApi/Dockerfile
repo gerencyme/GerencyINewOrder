@@ -23,14 +23,12 @@ RUN dotnet build "Domain/Domain.csproj" -c Release -o /app/build
 RUN dotnet build "Entities/Entities.csproj" -c Release -o /app/build
 RUN dotnet build "Infrastructure/Infrastructure.csproj" -c Release -o /app/build
 
-# Restante do seu Dockerfile...
-
 # Estágio de Publicação
 FROM build AS publish
 RUN dotnet publish "GerencyINewOrderApi/GerencyINewOrderApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Estágio Final
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 WORKDIR /app
 
 # Copie os arquivos publicados do projeto principal
