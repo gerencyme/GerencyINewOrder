@@ -3,16 +3,14 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
 # Copiar os arquivos de projeto
-COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
-COPY ["Domain/*.csproj", "Domain/"]
-COPY ["Entities/*.csproj", "Entities/"]
-COPY ["Infrastructure/*.csproj", "Infrastructure/"]
+COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
+COPY ["GerencyINewOrder/Domain/Domain.csproj", "Domain/"]
+COPY ["GerencyINewOrder/Entities/Entities.csproj", "Entities/"]
+COPY ["GerencyINewOrder/Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 
 # Restaurar dependências e compilar
 RUN dotnet restore
 COPY . .
-
-# Build the project
 RUN dotnet build "GerencyINewOrderApi/GerencyINewOrderApi.csproj" -c Release -o /app/build
 
 # Estágio 2: Publicação da aplicação
