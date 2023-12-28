@@ -1,7 +1,7 @@
 # Estágio 1: Construção da aplicação
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY . .
+
 # Copiar os arquivos de projeto
 COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
 COPY ["Domain/*.csproj", "Domain/"]
@@ -11,11 +11,13 @@ COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 # Restaurar dependências e compilar
 RUN dotnet restore
 COPY . .
-RUN dotnet build "GerencyINewOrderApi.csproj" -c Release -o /app/build
+
+# Build the project
+RUN dotnet build "GerencyINewOrderApi/GerencyINewOrderApi.csproj" -c Release -o /app/build
 
 # Estágio 2: Publicação da aplicação
 FROM build AS publish
-RUN dotnet publish "GerencyINewOrderApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "GerencyINewOrderApi/GerencyINewOrderApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Estágio 3: Configuração final
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
