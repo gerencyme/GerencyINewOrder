@@ -7,10 +7,10 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
-COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["Entities/Entities.csproj", "Entities/"]
-COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj"]
+COPY ["Domain/Domain.csproj"]
+COPY ["Entities/Entities.csproj"]
+COPY ["Infrastructure/Infrastructure.csproj"]
 COPY . .
 RUN dotnet restore
 COPY GerencyINewOrderApi.csproj .

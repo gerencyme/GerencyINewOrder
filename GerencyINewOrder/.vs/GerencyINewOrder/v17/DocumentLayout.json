@@ -22,8 +22,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -32,14 +36,10 @@
               "RelativeDocumentMoniker": "GerencyINewOrderApi\\Dockerfile",
               "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Dockerfile",
               "RelativeToolTip": "GerencyINewOrderApi\\Dockerfile",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2023-12-28T03:11:32.3Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
@@ -51,8 +51,7 @@
               "RelativeToolTip": "Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-28T02:38:21.73Z",
-              "EditorCaption": ""
+              "WhenOpened": "2023-12-28T02:38:21.73Z"
             },
             {
               "$type": "Document",
