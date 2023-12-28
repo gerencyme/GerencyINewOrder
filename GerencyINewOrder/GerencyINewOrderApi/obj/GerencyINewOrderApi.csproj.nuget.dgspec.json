@@ -300,6 +300,10 @@
               "target": "Package",
               "version": "[7.0.14, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.19.6-Preview.1, 1.19.6]"
+            },
             "MongoDB.Bson": {
               "target": "Package",
               "version": "[2.23.1, )"

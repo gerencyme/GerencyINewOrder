@@ -7,11 +7,9 @@ namespace Domain.Utils
     {
         public void MapDependencies(IServiceCollection services)
         {
-            // Mapeia as dependências relacionadas a Demand
-            services.AddSingleton<IDemandServices, DemandServices>();
+            // Mapeia as dependências relacionadas a NewOrder
+            services.AddSingleton<INewOrderServices, NewOrderServices>();
 
-            // Mapeia as dependências relacionadas a Product
-            services.AddSingleton<IProductServices, ProductServices>();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Entities;
-using GerencylApi.Models;
+using Entities.Entities;
+using GerencyINewOrderApi.Views;
 
-namespace GerencylApi.Config
+namespace GerencyINewOrderApi.Config
 {
     public class MappingConfig
     {
@@ -10,8 +10,10 @@ namespace GerencylApi.Config
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<DemandModel, Demand>();
-                config.CreateMap<Demand, DemandModel>();
+                config.CreateMap<NewOrder, NewOrderUpdateView>();
+                config.CreateMap<NewOrderUpdateView, NewOrder>();
+                config.CreateMap<NewOrder, NewOrderAddView>();
+                config.CreateMap<NewOrderAddView, NewOrder>();
             });
             return mappingConfig;
         }

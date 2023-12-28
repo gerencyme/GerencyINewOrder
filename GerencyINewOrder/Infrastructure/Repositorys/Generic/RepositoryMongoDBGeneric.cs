@@ -1,7 +1,6 @@
 ﻿using Domain.Interfaces.IGeneric;
 using Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Infrastructure.Repository.Generic
@@ -22,21 +21,21 @@ namespace Infrastructure.Repository.Generic
             await _collection.InsertOneAsync(entity);
         }
 
-        public async Task Delete(T entity)
+        public async Task Delete(Guid id)
         {
-            var filter = Builders<T>.Filter.Eq("_id", GetIdValue(entity));
+            var filter = Builders<T>.Filter.Eq("OrderId", id);
             await _collection.DeleteOneAsync(filter);
         }
 
-        public async Task<T> GetById(ObjectId id)
+        public async Task<T> GetById(Guid id)
         {
-            var filter = Builders<T>.Filter.Eq("_id", id);
+            var filter = Builders<T>.Filter.Eq("OrderId", id);
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
 
         public async Task<List<T>> GetAll()
         {
-            return await _collection.Find(new BsonDocument()).ToListAsync();
+            return await _collection.Find(Builders<T>.Filter.Empty).ToListAsync();
         }
 
         public async Task Update(T entity)

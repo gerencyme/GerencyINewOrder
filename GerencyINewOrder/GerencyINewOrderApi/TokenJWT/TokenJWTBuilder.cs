@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace GerencylApi.TokenJWT
 {
-     public class TokenJWTBuilder
+    public class TokenJWTBuilder
     {
         private SecurityKey securityKey = null;
         private string subject = "";
@@ -12,6 +12,8 @@ namespace GerencylApi.TokenJWT
         private string audience = "";
         private Dictionary<string, string> claims = new Dictionary<string, string>();
         private int expiryInMinutes = 20;
+
+        public TokenJWTBuilder() { } // Adicionando um construtor padrão
 
         public TokenJWTBuilder AddSecurityKey(SecurityKey securityKey)
         {
@@ -43,9 +45,9 @@ namespace GerencylApi.TokenJWT
             return this;
         }
 
-        public TokenJWTBuilder AddClaims(Dictionary<string, string> claims)
+        public TokenJWTBuilder AddClaims(Dictionary<string, string> additionalClaims)
         {
-            this.claims.Union(claims);
+            this.claims = this.claims.Union(additionalClaims).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             return this;
         }
 
@@ -55,46 +57,97 @@ namespace GerencylApi.TokenJWT
             return this;
         }
 
-
         private void EnsureArguments()
         {
             if (this.securityKey == null)
-                throw new ArgumentNullException("Security Key");
+                throw new ArgumentException("Security Key is required");
 
             if (string.IsNullOrEmpty(this.subject))
-                throw new ArgumentNullException("Subject");
+                throw new ArgumentException("Subject is required");
 
             if (string.IsNullOrEmpty(this.issuer))
-                throw new ArgumentNullException("Issuer");
+                throw new ArgumentException("Issuer is required");
 
             if (string.IsNullOrEmpty(this.audience))
-                throw new ArgumentNullException("Audience");
+                throw new ArgumentException("Audience is required");
         }
-
 
         public TokenJWT Builder()
         {
             EnsureArguments();
 
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub,this.subject),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            }.Union(this.claims.Select(item => new Claim(item.Key, item.Value)));
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, this.subject),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        }
+            .Union(this.claims.Select(item => new Claim(item.Key, item.Value)));
+
+            DateTime expiration = DateTime.UtcNow.AddMinutes(expiryInMinutes);
 
             var token = new JwtSecurityToken(
                 issuer: this.issuer,
                 audience: this.audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(expiryInMinutes),
-                signingCredentials: new SigningCredentials(
-                                                   this.securityKey,
-                                                   SecurityAlgorithms.HmacSha256)
-
-                );
+                expires: expiration,
+                signingCredentials: new SigningCredentials(this.securityKey, SecurityAlgorithms.HmacSha256)
+            );
 
             return new TokenJWT(token);
+        }
 
+        public TokenJWT Builder(bool isRefreshToken = false)
+        {
+            EnsureArguments();
+
+            var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, this.subject),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        }
+            .Union(this.claims.Select(item => new Claim(item.Key, item.Value)));
+
+            DateTime expiration = isRefreshToken
+                ? DateTime.UtcNow.AddMinutes(refreshTokenExpiryInMinutes)
+                : DateTime.UtcNow.AddMinutes(expiryInMinutes);
+
+            var token = new JwtSecurityToken(
+                issuer: this.issuer,
+                audience: this.audience,
+                claims: claims,
+                expires: expiration,
+                signingCredentials: new SigningCredentials(this.securityKey, SecurityAlgorithms.HmacSha256)
+            );
+
+            if (isRefreshToken)
+            {
+                var refreshExpiration = DateTime.UtcNow.AddMinutes(refreshTokenExpiryInMinutes);
+                var refreshClaim = new Claim("refresh_token", "true");
+                var refreshJwt = new JwtSecurityToken(
+                    issuer: this.issuer,
+                    audience: this.audience,
+                    claims: new[] { refreshClaim },
+                    expires: refreshExpiration,
+                    signingCredentials: new SigningCredentials(this.securityKey, SecurityAlgorithms.HmacSha256)
+                );
+                ((List<Claim>)token.Claims).AddRange(refreshJwt.Claims);
+            }
+
+            return new TokenJWT(token, isRefreshToken);
+        }
+
+        private int refreshTokenExpiryInMinutes = 1440; // valor padrão, ajuste conforme necessário
+
+        public TokenJWTBuilder WithRefreshTokenExpiration(int minutes)
+        {
+            this.refreshTokenExpiryInMinutes = minutes;
+            return this;
+        }
+
+        public TokenJWTBuilder WithExpiration(int minutes)
+        {
+            this.expiryInMinutes = minutes;
+            return this;
         }
     }
 }

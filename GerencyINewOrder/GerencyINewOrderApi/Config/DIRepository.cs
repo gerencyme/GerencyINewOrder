@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Interfaces.IRepositorys;
 using Infrastructure.Repository.Repositories;
 
 namespace GerencyIProductApi.Config
@@ -8,8 +8,8 @@ namespace GerencyIProductApi.Config
         public void RegisterDependencies(IServiceCollection services)
         {
             // Registra as dependências
-            services.AddSingleton<IRepositoryDemand, DemandRepository>();
-            services.AddSingleton<IRepositoryProduct, ProductRepository>();
+            services.AddSingleton<IRepositoryNewOrder, NewOrderRepository>();
+            //services.AddSingleton<IRepositoryProduct, ProductRepository>();
         }
     }
 }

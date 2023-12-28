@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "N21zDZU7zEoH+qlW14uG/f8ttshbnCKDM38/XV92zBF7pJUCgkwbZxhpT6Ii9zGHkjk1M2j4BlX1C3ym0pNPBw==",
+  "dgSpecHash": "x/xlt6MsZ/4reOgUtW1ixdAyIMMS0dv+HmQKGBTpAEgKfX1S43xFFOVArc+QLlW8gpedWV6yoYXKSynNk8OroA==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\GerencyINewOrderApi.csproj",
   "expectedPackageFiles": [
@@ -42,6 +42,7 @@
     "C:\\Users\\João\\.nuget\\packages\\microsoft.net.http\\2.0.20710\\microsoft.net.http.2.0.20710.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\João\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.6-preview.1\\microsoft.visualstudio.azure.containers.tools.targets.1.19.6-preview.1.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\mongodb.bson\\2.23.1\\mongodb.bson.2.23.1.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\mongodb.driver\\2.23.1\\mongodb.driver.2.23.1.nupkg.sha512",

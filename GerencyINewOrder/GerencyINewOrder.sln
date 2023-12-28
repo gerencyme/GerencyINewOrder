@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApis", "WebApis", "{50C2CCA0-00C8-45EA-B6FD-3703B2590060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6D120BE4-CDA7-44B6-BC85-D910924B517E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{6D120BE4-CDA7-44B6-BC85-D910924B517E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{381BB71B-06BA-48E0-B0AF-CC4FD859610B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{381BB71B-06BA-48E0-B0AF-CC4FD859610B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DAC8AE4C-7B20-466C-A7D9-B8ABCAD94A68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DAC8AE4C-7B20-466C-A7D9-B8ABCAD94A68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerencyINewOrderApi", "GerencyINewOrderApi\GerencyINewOrderApi.csproj", "{7F43CF03-4597-43D5-BC9B-376DE31A587D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerencyINewOrderApi", "GerencyINewOrderApi\GerencyINewOrderApi.csproj", "{7F43CF03-4597-43D5-BC9B-376DE31A587D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
