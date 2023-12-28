@@ -1,26 +1,27 @@
-# Estágio 1: Construção da aplicação
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-
-# Copiar os arquivos de projeto
-COPY GerencyINewOrder/**/*.csproj .
-
-# Restaurar dependências e compilar
-RUN dotnet restore
-COPY . .
-RUN dotnet build "GerencyINewOrderApi/GerencyINewOrderApi.csproj" -c Release -o /app/build
-
-# Estágio 2: Publicação da aplicação
-FROM build AS publish
-RUN dotnet publish "GerencyINewOrderApi/GerencyINewOrderApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-# Estágio 3: Configuração final
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-# Copiar os artefatos da publicação
-COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS=http://+:8000;http://+:80
+ENV ASPNETCORE_ENVIRONMENT=Development
 
-# Comando de entrada
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Entities/Entities.csproj", "Entities/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+RUN dotnet restore "./GerencyINewOrderApi/./GerencyINewOrderApi.csproj"
+COPY . .
+WORKDIR "/src/GerencyINewOrderApi"
+RUN dotnet build "./GerencyINewOrderApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./GerencyINewOrderApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "GerencyINewOrderApi.dll"]
