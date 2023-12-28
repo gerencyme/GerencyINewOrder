@@ -1,12 +1,12 @@
 # Estágio 1: Construção da aplicação
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-
+COPY . .
 # Copiar os arquivos de projeto
-COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrder/"]
-COPY ["Domain/*.csproj", "Domain/"]
-COPY ["Entities/*.csproj", "Entities/"]
-COPY ["Infrastructure/*.csproj", "Infrastructure/"]
+COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj"]
+COPY ["Domain/*.csproj"]
+COPY ["Entities/*.csproj"]
+COPY ["Infrastructure/*.csproj"]
 
 # Restaurar dependências e compilar
 RUN dotnet restore
