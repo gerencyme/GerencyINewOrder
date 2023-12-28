@@ -9,10 +9,10 @@ COPY . .
 RUN dotnet restore
 
 # Copie os arquivos do projeto principal
-COPY ./GerencyINewOrderApi/GerencyINewOrderApi.csproj GerencyINewOrderApi/
-COPY ./Domain/Domain.csproj Domain/
-COPY ./Entities/Entities.csproj Entities/
-COPY ./Infrastructure/Infrastructure.csproj Infrastructure/
+COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
+COPY ["GerencyINewOrder/Domain/Domain.csproj", "Domain/"]
+COPY ["GerencyINewOrder/Entities/Entities.csproj", "Entities/"]
+COPY ["GerencyINewOrder/Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 
 # Restaure as dependências dos projetos
 RUN dotnet restore
