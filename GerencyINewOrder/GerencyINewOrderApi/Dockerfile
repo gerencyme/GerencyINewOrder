@@ -14,7 +14,7 @@ COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 COPY . .
 RUN dotnet restore
 COPY GerencyINewOrderApi.csproj .
-RUN dotnet build "./GerencyINewOrderApi.csproj" -c Release -o /app/build
+RUN dotnet build "GerencyINewOrderApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
