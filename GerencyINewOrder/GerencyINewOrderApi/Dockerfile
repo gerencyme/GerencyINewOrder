@@ -5,7 +5,7 @@ WORKDIR /src
 # Copiar os arquivos de projeto
 COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["Entities/Entities.csproj", "Entities/"]
+COPY ["GerencyINewOrderApi/Entities/Entities.csproj", "Entities/"]
 COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 
 # Restaurar dependências e compilar
