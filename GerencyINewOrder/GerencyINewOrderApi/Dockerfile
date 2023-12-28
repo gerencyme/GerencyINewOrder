@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY . .
 # Copiar os arquivos de projeto
-COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj"]
+COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
 COPY ["Domain/*.csproj"]
 COPY ["Entities/*.csproj"]
 COPY ["Infrastructure/*.csproj"]
