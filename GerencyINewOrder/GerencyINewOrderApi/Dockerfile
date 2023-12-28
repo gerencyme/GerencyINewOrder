@@ -10,10 +10,10 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 # Copiar os arquivos de projeto
-COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
-COPY ["GerencyINewOrder/Domain/Domain.csproj", "Domain/"]
-COPY ["GerencyINewOrder/Entities/Entities.csproj", "Entities/"]
-COPY ["GerencyINewOrder/Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Entities/Entities.csproj", "Entities/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 
 # Restaurar as dependências
 RUN dotnet restore "GerencyINewOrderApi/GerencyINewOrderApi.csproj"
