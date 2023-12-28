@@ -3,9 +3,9 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
 # Copiar os arquivos de projeto
-COPY ["GerencyINewOrderApi/*.csproj", "GerencyINewOrderApi/"]
-COPY ["Domain/*.csproj", "Domain/"]
-COPY ["Entities/*.csproj", "Entities/"]
+COPY ["GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Entities/Entities.csproj", "Entities/"]
 COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 
 # Restaurar dependências e compilar
