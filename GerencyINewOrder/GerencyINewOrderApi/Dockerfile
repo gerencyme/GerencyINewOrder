@@ -4,9 +4,9 @@ WORKDIR /src
 COPY . .
 # Copiar os arquivos de projeto
 COPY ["GerencyINewOrder/GerencyINewOrderApi/GerencyINewOrderApi.csproj", "GerencyINewOrderApi/"]
-COPY ["Domain/*.csproj"]
-COPY ["Entities/*.csproj"]
-COPY ["Infrastructure/*.csproj"]
+COPY ["Domain/*.csproj", "Domain/"]
+COPY ["Entities/*.csproj", "Entities/"]
+COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 
 # Restaurar dependências e compilar
 RUN dotnet restore
