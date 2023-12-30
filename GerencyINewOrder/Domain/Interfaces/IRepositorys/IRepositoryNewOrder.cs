@@ -7,5 +7,7 @@ namespace Domain.Interfaces.IRepositorys
     {
         Task DeleteNewOrder(Guid id);
         Task UpdateNewOrder(NewOrder newOrder, Guid orderId);
+        Task<List<NewOrder>> GetLast10NewOrders(string cnpj);
+        Task<List<NewOrder>> GetOrdersByDateRangeWithPagination(string cnpj, DateTime startDate, DateTime endDate, int pageNumber, int pageSize);
     }
 }

@@ -11,7 +11,7 @@ namespace GerencyINewOrderApi.Views
         public string CompanieCNPJ { get; set; }
         public DateTime OrderDate { get; set; }
         public string OrderColorIdentity { get; set; }
-        public List<Product> Product { get; set; }
+        public Product Product { get; set; }
         public Location Location { get; set; }
     }
 }

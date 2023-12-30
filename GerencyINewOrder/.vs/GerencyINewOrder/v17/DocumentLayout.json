@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\domain\\interfaces\\irepositorys\\irepositoryneworder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\irepositorys\\irepositoryneworder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{381BB71B-06BA-48E0-B0AF-CC4FD859610B}|Entities\\Entities.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\entities\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{381BB71B-06BA-48E0-B0AF-CC4FD859610B}|Entities\\Entities.csproj|solutionrelative:entities\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\controller\\newordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\controller\\newordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,48 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Dockerfile",
-              "RelativeDocumentMoniker": "GerencyINewOrderApi\\Dockerfile",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Dockerfile",
-              "RelativeToolTip": "GerencyINewOrderApi\\Dockerfile",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2023-12-28T03:11:32.3Z",
+              "Title": "NewOrderController.cs",
+              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Controller\\NewOrderController.cs",
+              "RelativeDocumentMoniker": "GerencyINewOrderApi\\Controller\\NewOrderController.cs",
+              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Controller\\NewOrderController.cs",
+              "RelativeToolTip": "GerencyINewOrderApi\\Controller\\NewOrderController.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAowEkAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-30T07:14:37.406Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IRepositoryNewOrder.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "RelativeDocumentMoniker": "Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "RelativeToolTip": "Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-28T02:38:21.73Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Entities\\Entities\\Product.cs",
-              "RelativeDocumentMoniker": "Entities\\Entities\\Product.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Entities\\Entities\\Product.cs",
-              "RelativeToolTip": "Entities\\Entities\\Product.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-28T02:37:35.536Z"
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }

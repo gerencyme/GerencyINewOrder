@@ -54,24 +54,63 @@ namespace Infrastructure.Repository.Repositories
             return await _collection.Aggregate<Product>(pipeline).ToListAsync();
         }
 
-        public async Task DeleteNewOrder(Guid id)
-        {
-            var filter = Builders<NewOrder>.Filter.Eq("OrderId", id);
-            await _collection.DeleteOneAsync(filter);
-        }
 
-        public async Task<NewOrder> GetByIdNewOrder(Guid id)
+
+
+
+        /*public async Task<List<DailyOrderTotal>> GetLast7DaysOrderTotal(string cnpj)
         {
-            var filter = Builders<NewOrder>.Filter.Eq("OrderId", id);
-            return await _collection.Find(filter).FirstOrDefaultAsync();
+            var endDate = DateTime.UtcNow;  // Data atual
+            var startDate = endDate.AddDays(-7);  // Retrocede 7 dias
+
+            var filter = Builders<NewOrder>.Filter.And(
+                Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj),
+                Builders<NewOrder>.Filter.Gte("OrderDate", startDate),
+                Builders<NewOrder>.Filter.Lte("OrderDate", endDate)
+            );
+
+            var group = new BsonDocument
+    {
+        {
+            "$group", new BsonDocument
+            {
+                { "_id", new BsonDocument("$dateToString", new BsonDocument("format", "%Y-%m-%d").Add("date", "$OrderDate")) },
+                { "totalOrders", new BsonDocument("$sum", 1) }
+            }
         }
+    };
+
+            var sort = Builders<BsonDocument>.Sort.Ascending("_id");
+
+            var pipeline = PipelineDefinition<NewOrder, DailyOrderTotal>.Create(
+                new IPipelineStageDefinition[]
+                {
+            PipelineStageDefinitionBuilder.Match(filter),
+            PipelineStageDefinitionBuilder.Group(group),
+            PipelineStageDefinitionBuilder.Sort(sort)
+                }
+            );
+
+            var result = await _collection.Aggregate(pipeline).ToListAsync();
+
+            var dailyOrderTotals = result.Select(doc => new DailyOrderTotal
+            {
+                Date = DateTime.Parse(doc["_id"].AsString),
+                TotalOrders = doc["totalOrders"].AsInt32
+            }).ToList();
+
+            return dailyOrderTotals;
+        }*/
+
+
+
 
         public async Task UpdateNewOrder(NewOrder entity, Guid orderId)
         {
             var filter = Builders<NewOrder>.Filter.Eq("OrderId", orderId);
             var existingEntity = await _collection.Find(filter).FirstOrDefaultAsync();
 
-            if (existingEntity != null && existingEntity.Id != null)
+            if (existingEntity != null)
             {
                 entity.Id = existingEntity.Id;
                 entity.OrderId = existingEntity.OrderId;
@@ -90,6 +129,63 @@ namespace Infrastructure.Repository.Repositories
         {
             var filter = Builders<NewOrder>.Filter.Eq("OrderId", orderId);
             return await _collection.ReplaceOneAsync(filter, entity);
+        }
+
+        public async Task DeleteNewOrder(Guid id)
+        {
+            var filter = Builders<NewOrder>.Filter.Eq("OrderId", id);
+            await _collection.DeleteOneAsync(filter);
+        }
+
+        public async Task<NewOrder> GetByIdNewOrder(Guid id)
+        {
+            var filter = Builders<NewOrder>.Filter.Eq("OrderId", id);
+            return await _collection.Find(filter).FirstOrDefaultAsync();
+        }
+
+
+        public async Task<List<NewOrder>> GetLast10NewOrders(string cnpj)
+        {
+            var filter = Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj);
+            var sort = Builders<NewOrder>.Sort.Descending("OrderDate");
+
+            return await _collection.Find(filter)
+                                   .Sort(sort)
+                                   .Limit(10)
+                                   .ToListAsync();
+        }
+
+        public async Task<List<NewOrder>> GetOrdersByDateRange(string cnpj, DateTime startDate, DateTime endDate)
+        {
+            var filter = Builders<NewOrder>.Filter.And(
+                Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj),
+                Builders<NewOrder>.Filter.Gte("OrderDate", startDate),
+                Builders<NewOrder>.Filter.Lte("OrderDate", endDate)
+            );
+
+            var sort = Builders<NewOrder>.Sort.Descending("OrderDate");
+
+            return await _collection.Find(filter)
+                                   .Sort(sort)
+                                   .ToListAsync();
+        }
+
+        public async Task<List<NewOrder>> GetOrdersByDateRangeWithPagination(string cnpj, DateTime startDate, DateTime endDate, int pageNumber, int pageSize)
+        {
+            var filter = Builders<NewOrder>.Filter.And(
+                Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj),
+                Builders<NewOrder>.Filter.Gte("OrderDate", startDate),
+                Builders<NewOrder>.Filter.Lte("OrderDate", endDate)
+            );
+
+            var sort = Builders<NewOrder>.Sort.Descending("OrderDate");
+
+            var query = _collection.Find(filter)
+                                   .Sort(sort)
+                                   .Skip((pageNumber - 1) * pageSize)
+                                   .Limit(pageSize);
+
+            return await query.ToListAsync();
         }
     }
 }

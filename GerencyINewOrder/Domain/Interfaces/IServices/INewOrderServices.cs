@@ -1,4 +1,5 @@
-﻿using Entities.Entities;
+﻿using Domain.Views;
+using Entities.Entities;
 using GerencyINewOrderApi.Views;
 using MongoDB.Bson;
 
@@ -10,12 +11,15 @@ namespace Domain.Interfaces.IServices
 
         Task<NewOrderUpdateView> UpdateNewOrder(NewOrderUpdateView objeto);
 
-        Task<List<NewOrder>> ListNewOrder();
-
         Task<string> DeleteNewOrder(Guid idNewOrder);
 
         Task<NewOrder> GetByEntityId(Guid idNewOrder);
 
+        Task<List<NewOrder>> ListNewOrder();
+
+        Task<List<NewOrder>> GetLast10NewOrders(string cnpj);
+
+        Task<List<NewOrder>> GetOrdersByDateRangeWithPagination(GetOrderView paginatiionNeworder);
 
     }
 }

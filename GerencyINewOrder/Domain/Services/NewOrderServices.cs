@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using Domain.Interfaces.IRepositorys;
 using Domain.Interfaces.IServices;
+using Domain.Utils.HttpStatusExceptionCustom;
+using Domain.Views;
 using Entities.Entities;
 using GerencyINewOrderApi.Views;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace Domain.Services
 {
     public class NewOrderServices : INewOrderServices
     {
         private readonly IRepositoryNewOrder _IrepositoryNewOrder;
-        private readonly IMongoCollection<NewOrder> _usersCollection;
         private readonly IMapper _mapper;
         //private readonly HttpClient _httpClient;
 
@@ -24,9 +23,17 @@ namespace Domain.Services
 
         public async Task<NewOrderUpdateView> AddNewOrder(NewOrderAddView objeto)
         {
-            var newOrder = _mapper.Map<NewOrder>(objeto);
 
-            //newOrder.OrderId = Guid.NewGuid();
+            if (string.IsNullOrWhiteSpace(objeto.CompanieCNPJ))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "CNPJ é obrigatório.");
+            }
+            if (string.IsNullOrWhiteSpace(objeto.CompanyId.ToString()))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "Company Id é obrigatório.");
+            }
+
+            var newOrder = _mapper.Map<NewOrder>(objeto);
 
             await _IrepositoryNewOrder.Add(newOrder);
 
@@ -37,7 +44,6 @@ namespace Domain.Services
 
         public async Task<string> DeleteNewOrder(Guid idNewOrder)
         {
-            var deleteDemand = await _IrepositoryNewOrder.GetById(idNewOrder);
             await _IrepositoryNewOrder.DeleteNewOrder(idNewOrder);
 
             return "excluido com sucesso";
@@ -45,9 +51,13 @@ namespace Domain.Services
 
         public async Task<NewOrder> GetByEntityId(Guid idNewOrder)
         {
-            //var toStringID = idNewOrder.ToString();
+            if (string.IsNullOrWhiteSpace(idNewOrder.ToString()))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "Order Id é obrigatório.");
+            }
+
             var getDemand = await _IrepositoryNewOrder.GetById(idNewOrder);
-            //var returnObjeto = _mapper.Map<NewOrderUpdateView>(getDemand);
+
             return getDemand;
         }
 
@@ -57,16 +67,47 @@ namespace Domain.Services
             return list;
         }
 
+        public async Task<List<NewOrder>> GetLast10NewOrders(string cnpj)
+        {
+            if (string.IsNullOrWhiteSpace(cnpj))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "CNPJ é obrigatório.");
+            }
+            var listGetLast10NewOrders = await _IrepositoryNewOrder.GetLast10NewOrders(cnpj);
+
+            return listGetLast10NewOrders;
+        }
+
         public async Task<NewOrderUpdateView> UpdateNewOrder(NewOrderUpdateView objeto)
         {
-            var newOrderUpdate = _mapper.Map<NewOrder>(objeto); 
+            if (string.IsNullOrWhiteSpace(objeto.CompanieCNPJ))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "CNPJ é obrigatório.");
+            }
+            if (string.IsNullOrWhiteSpace(objeto.CompanyId.ToString()))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "Company Id é obrigatório.");
+            }
+            if (string.IsNullOrWhiteSpace(objeto.OrderId.ToString()))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "Order Id é obrigatório.");
+            }
+
+            var newOrderUpdate = _mapper.Map<NewOrder>(objeto);
 
             await _IrepositoryNewOrder.UpdateNewOrder(newOrderUpdate, objeto.OrderId);
-
-            var returnObjeto = _mapper.Map<NewOrderUpdateView>(newOrderUpdate);
             
 
-            return returnObjeto;
+            return objeto;
+        }
+
+        public async Task<List<NewOrder>> GetOrdersByDateRangeWithPagination(GetOrderView paginatiionNeworder)
+        {
+           var listNewOrders = await _IrepositoryNewOrder.GetOrdersByDateRangeWithPagination(
+                                                         paginatiionNeworder.CompanieCNPJ, paginatiionNeworder.StartDate, paginatiionNeworder.EndDate,
+                                                         paginatiionNeworder.PageNumber, paginatiionNeworder.PageSize);
+
+            return listNewOrders;
         }
 
 

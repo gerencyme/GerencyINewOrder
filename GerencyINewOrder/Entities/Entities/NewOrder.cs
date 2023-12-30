@@ -13,12 +13,12 @@ namespace Entities.Entities
         public string CompanieCNPJ { get; set; }
         public string OrderColorIdentity { get; set; }
         public DateTime OrderDate { get; set; }
-        public List<Product> Product { get; set; }
+        public Product Product { get; set; }
         public Location Location { get; set; }
 
         public NewOrder()
         {
-            Product = new List<Product>();
+            Product = new Product();
             Location = new Location();
             OrderId = Guid.NewGuid();
             Id = ObjectId.GenerateNewId();
