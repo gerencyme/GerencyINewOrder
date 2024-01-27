@@ -17,9 +17,11 @@ namespace Domain.Interfaces.IServices
 
         Task<List<NewOrder>> ListNewOrder();
 
-        Task<List<NewOrder>> GetLast10NewOrders(string cnpj);
+        Task<List<OrderCardView>> GetLast12NewOrders(string cnpj);
 
         Task<List<NewOrder>> GetOrdersByDateRangeWithPagination(GetOrderView paginatiionNeworder);
+
+        Task<List<OrderCardView>> GetOrdersByDateWithPagination(GetOrderView paginatiionNeworder);
 
     }
 }

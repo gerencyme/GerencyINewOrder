@@ -144,14 +144,14 @@ namespace Infrastructure.Repository.Repositories
         }
 
 
-        public async Task<List<NewOrder>> GetLast10NewOrders(string cnpj)
+        public async Task<List<NewOrder>> GetLast12NewOrders(string cnpj)
         {
             var filter = Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj);
             var sort = Builders<NewOrder>.Sort.Descending("OrderDate");
 
             return await _collection.Find(filter)
                                    .Sort(sort)
-                                   .Limit(10)
+                                   .Limit(12)
                                    .ToListAsync();
         }
 
@@ -186,6 +186,53 @@ namespace Infrastructure.Repository.Repositories
                                    .Limit(pageSize);
 
             return await query.ToListAsync();
+        }
+
+        public async Task<List<NewOrder>> GetOrdersByDateWithPagination(string cnpj, int pageNumber, int pageSize)
+        {
+            var filter = Builders<NewOrder>.Filter.And(
+                Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj)
+            );
+
+            var sort = Builders<NewOrder>.Sort.Descending("OrderDate");
+
+            var query = _collection.Find(filter)
+                                   .Sort(sort)
+                                   .Skip((pageNumber - 1) * pageSize)
+                                   .Limit(pageSize);
+
+            return await query.ToListAsync();
+        }
+
+
+        public async Task<List<NewOrder>> GetSimilarOrdersUnderAnalysis(string cnpj, string orderId)
+        {
+            // Encontrar o pedido original
+            var originalOrderFilter = Builders<NewOrder>.Filter.And(
+                Builders<NewOrder>.Filter.Eq("CompanieCNPJ", cnpj),
+                Builders<NewOrder>.Filter.Eq("OrderId", orderId)
+            );
+
+            var originalOrder = await _collection.Find(originalOrderFilter).FirstOrDefaultAsync();
+
+            if (originalOrder == null)
+            {
+                // Pedido original não encontrado
+                return new List<NewOrder>();
+            }
+
+            // Encontrar pedidos com os mesmos produtos e status "underAnalysis"
+            var similarOrdersFilter = Builders<NewOrder>.Filter.And(
+                Builders<NewOrder>.Filter.ElemMatch("Product", Builders<Product>.Filter.Eq("ProductName", originalOrder.Product.ProductName)),
+                Builders<NewOrder>.Filter.Eq("StatusOrder", "underAnalysis"),
+                Builders<NewOrder>.Filter.Ne("OrderId", orderId)  // Excluir o pedido original
+            );
+
+            var sort = Builders<NewOrder>.Sort.Descending("OrderDate");
+
+            return await _collection.Find(similarOrdersFilter)
+                                   .Sort(sort)
+                                   .ToListAsync();
         }
     }
 }

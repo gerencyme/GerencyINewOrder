@@ -4,7 +4,6 @@ using Domain.Views;
 using GerencyINewOrderApi.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
 using System.Security.Claims;
 
 namespace Controllers
@@ -66,8 +65,8 @@ namespace Controllers
         }
 
         [Produces("application/json")]
-        [HttpPost("/api/GetLast10NewOrders")]
-        public async Task<IActionResult> GetLast10NewOrders([FromBody] CnpjView cnpj)
+        [HttpPost("/api/GetLast12NewOrders")]
+        public async Task<IActionResult> GetLast12NewOrders([FromBody] CnpjView cnpj)
         {
             var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             try
@@ -78,7 +77,7 @@ namespace Controllers
 
                     if (cnpj.CompanieCNPJ == userCNPJ)
                     {
-                        var returnGetLast10NewOrders = await _newOrderServices.GetLast10NewOrders(cnpj.CompanieCNPJ);
+                        var returnGetLast10NewOrders = await _newOrderServices.GetLast12NewOrders(cnpj.CompanieCNPJ);
                         return Ok(returnGetLast10NewOrders);
                     }
 
@@ -107,6 +106,34 @@ namespace Controllers
                     if (getOrderView.CompanieCNPJ == userCNPJ)
                     {
                         var returnGetLast10NewOrders = await _newOrderServices.GetOrdersByDateRangeWithPagination(getOrderView);
+                        return Ok(returnGetLast10NewOrders);
+                    }
+
+                }
+
+                return BadRequest("usuário não encontrado");
+            }
+            catch (HttpStatusExceptionCustom ex)
+            {
+
+                return StatusCode(ex.StatusCode, ex.Message);
+            }
+        }
+
+        [Produces("application/json")]
+        [HttpPost("/api/GetOrdersByDateWithPagination")]
+        public async Task<IActionResult> GetOrdersByDateWithPagination([FromBody] GetOrderView getOrderView)
+        {
+            var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            try
+            {
+
+                if (userCNPJ != null)
+                {
+
+                    if (getOrderView.CompanieCNPJ == userCNPJ)
+                    {
+                        var returnGetLast10NewOrders = await _newOrderServices.GetOrdersByDateWithPagination(getOrderView);
                         return Ok(returnGetLast10NewOrders);
                     }
 

@@ -15,7 +15,8 @@ namespace Entities.Entities
         public DateTime OrderDate { get; set; }
         public Product Product { get; set; }
         public Location Location { get; set; }
-
+        public bool IsLiked { get; set; }
+        public string OrderStatus { get; set; }
         public NewOrder()
         {
             Product = new Product();

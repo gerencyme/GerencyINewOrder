@@ -35,6 +35,8 @@ namespace Domain.Services
 
             var newOrder = _mapper.Map<NewOrder>(objeto);
 
+            newOrder.OrderStatus = "underAnalysis";
+
             await _IrepositoryNewOrder.Add(newOrder);
 
             var returnObjeto = _mapper.Map<NewOrderUpdateView>(newOrder);
@@ -67,15 +69,17 @@ namespace Domain.Services
             return list;
         }
 
-        public async Task<List<NewOrder>> GetLast10NewOrders(string cnpj)
+        public async Task<List<OrderCardView>> GetLast12NewOrders(string cnpj)
         {
             if (string.IsNullOrWhiteSpace(cnpj))
             {
                 throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "CNPJ é obrigatório.");
             }
-            var listGetLast10NewOrders = await _IrepositoryNewOrder.GetLast10NewOrders(cnpj);
+            var listGetLast10NewOrders = await _IrepositoryNewOrder.GetLast12NewOrders(cnpj);
 
-            return listGetLast10NewOrders;
+            var listGetLast10OrderCardView = _mapper.Map<List<OrderCardView>>(listGetLast10NewOrders);
+
+            return listGetLast10OrderCardView;
         }
 
         public async Task<NewOrderUpdateView> UpdateNewOrder(NewOrderUpdateView objeto)
@@ -108,6 +112,17 @@ namespace Domain.Services
                                                          paginatiionNeworder.PageNumber, paginatiionNeworder.PageSize);
 
             return listNewOrders;
+        }
+
+
+        public async Task<List<OrderCardView>> GetOrdersByDateWithPagination(GetOrderView paginatiionNeworder)
+        {
+            var listOrders = await _IrepositoryNewOrder.GetOrdersByDateWithPagination(
+                                                          paginatiionNeworder.CompanieCNPJ, paginatiionNeworder.PageNumber, paginatiionNeworder.PageSize);
+
+            var listGetOrderCardView = _mapper.Map<List<OrderCardView>>(listOrders);
+
+            return listGetOrderCardView;
         }
 
 

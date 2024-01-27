@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Views;
 using Entities.Entities;
 using GerencyINewOrderApi.Views;
 
@@ -14,6 +15,8 @@ namespace GerencyINewOrderApi.Config
                 config.CreateMap<NewOrderUpdateView, NewOrder>();
                 config.CreateMap<NewOrder, NewOrderAddView>();
                 config.CreateMap<NewOrderAddView, NewOrder>();
+                config.CreateMap<OrderCardView, NewOrder>();
+                config.CreateMap<NewOrder, OrderCardView>();
             });
             return mappingConfig;
         }

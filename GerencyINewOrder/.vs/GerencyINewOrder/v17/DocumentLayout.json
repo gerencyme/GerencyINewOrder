@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\controller\\newordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\controller\\newordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,21 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NewOrderController.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "RelativeDocumentMoniker": "GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "RelativeToolTip": "GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAowEkAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-30T07:14:37.406Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
