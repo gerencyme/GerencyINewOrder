@@ -4,6 +4,7 @@ using Domain.Interfaces.IServices;
 using Domain.Utils.HttpStatusExceptionCustom;
 using Domain.Views;
 using Entities.Entities;
+using Entities.Enums;
 using GerencyINewOrderApi.Views;
 
 namespace Domain.Services
@@ -105,6 +106,20 @@ namespace Domain.Services
             return objeto;
         }
 
+        public async Task<string> UpdateIsLikedField(string cnpj, string orderId, bool isLiked)
+        {
+            if (string.IsNullOrWhiteSpace(cnpj))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "CNPJ é obrigatório.");
+            }
+            if (string.IsNullOrWhiteSpace(orderId))
+            {
+                throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "Order Id é obrigatório.");
+            }
+
+            return await _IrepositoryNewOrder.UpdateIsLikedField(cnpj, orderId, isLiked);
+        }
+
         public async Task<List<NewOrder>> GetOrdersByDateRangeWithPagination(GetOrderView paginatiionNeworder)
         {
            var listNewOrders = await _IrepositoryNewOrder.GetOrdersByDateRangeWithPagination(
@@ -125,48 +140,124 @@ namespace Domain.Services
             return listGetOrderCardView;
         }
 
-
-        /*public async Task<List<NewOrder>> ListNewOrder2()
+        public async Task<List<ProductIsByLikedView>> GetOrdersByIsLiked(string cnpj)
         {
-            // Exemplo de uso do método Get para obter a lista de novos pedidos de um serviço web fictício
-            string apiUrl = "https://api.example.com/neworders";
-            HttpResponseMessage getResponse = await _httpClient.GetAsync(apiUrl);
+            const bool isLiked = true;
+            const string underAnalysis = "underAnalysis";
+            const string done = "done";
+            const string cancel = "canceled";
+            if (string.IsNullOrWhiteSpace(cnpj))
+            {
+                throw new ArgumentException($"'{nameof(cnpj)}' cannot be null or whitespace.", nameof(cnpj));
+            }
 
-            if (getResponse.IsSuccessStatusCode)
+            var listOrders = await _IrepositoryNewOrder.GetOrdersByIsLiked(cnpj, isLiked);
+
+            int countStatusUnderAnalise = 0;
+            int countStatusAnalise = 0;
+            int countStatusCnacel = 0;
+
+            
+            List<ProductIsByLikedView> listProductsByLiked2 = new List<ProductIsByLikedView>();
+
+            foreach (var order in listOrders)
             {
-                // Leitura e deserialização da resposta JSON
-                List<NewOrder> newOrders = await getResponse.ReadContentAs<List<NewOrder>>();
-                return newOrders;
+                string nameProduct = order.Product.ProductName;
+
+                // Verifica se o produto já está na lista
+                ProductIsByLikedView productIsByLiked = listProductsByLiked2.FirstOrDefault(x => x.ProductName == nameProduct);
+
+                if (productIsByLiked == null)
+                {
+                    // Cria um novo objeto ProductIsByLiked
+                    productIsByLiked = new ProductIsByLikedView
+                    {
+                        
+                        OrderId = order.OrderId,
+                        CompanyId = order.CompanyId,
+                        OrderColorIdentity = order.OrderColorIdentity,
+                        ProductName = nameProduct,
+                        ProductBrand = order.Product.ProductBrand,
+                        ProductType = order.Product.ProductType,
+                        CountStatusUnderAnalise = 0,
+                        CountStatusAnalise = 0,
+                        CountStatusCnacel = 0
+                    };
+
+                    listProductsByLiked2.Add(productIsByLiked);
+                }
+
+                // Atualiza o contador do status apropriado
+                switch (order.OrderStatus)
+                {
+                    case underAnalysis:
+                        productIsByLiked.CountStatusUnderAnalise++;
+                        break;
+                    case done:
+                        productIsByLiked.CountStatusAnalise++;
+                        break;
+                    case cancel:
+                        productIsByLiked.CountStatusCnacel++;
+                        break;
+                }
             }
-            else
-            {
-                Console.WriteLine($"Falha ao obter a lista de novos pedidos via API. Razão: {getResponse.ReasonPhrase}");
-                return null;
-            }
+
+            return listProductsByLiked2;
         }
-
-        public async Task AddNewOrder2(ObjectId demandId, string observation, DateTime date)
-        {
-            // Criação de um novo pedido
-            var newOrder = new NewOrder();
-            await _IrepositoryNewOrder.Add(newOrder);
-
-            // Exemplo de uso do método PostAsJson para enviar o novo pedido para um serviço web fictício
-            string apiUrl = "https://api.example.com/neworders";
-            HttpResponseMessage postResponse = await _httpClient.PostAsJson(apiUrl, newOrder);
-
-            if (postResponse.IsSuccessStatusCode)
-            {
-                // O pedido foi enviado com sucesso para o serviço web
-                Console.WriteLine("Novo pedido adicionado com sucesso via API.");
-            }
-            else
-            {
-                Console.WriteLine($"Falha ao adicionar novo pedido via API. Razão: {postResponse.ReasonPhrase}");
-            }
-
-            return;
-        }*/
-
     }
 }
+
+
+/*List<ProductIsByLikedView> listProductsByLiked = listOrders.GroupBy(x => x.Product.ProductName)
+                                                .Select(x => new ProductIsByLikedView
+                                                {
+                                                    ProductName = x.Key,
+                                                    CountStatusUnderAnalise = x.Where(y => y.OrderStatus == underAnalysis).Count(),
+                                                    CountStatusAnalise = x.Where(y => y.OrderStatus == done).Count(),
+                                                    CountStatusCnacel = x.Where(y => y.OrderStatus == cancel).Count()
+                                                })
+                                                .ToList();*/
+
+
+
+/*public async Task<List<NewOrder>> ListNewOrder2()
+{
+    // Exemplo de uso do método Get para obter a lista de novos pedidos de um serviço web fictício
+    string apiUrl = "https://api.example.com/neworders";
+    HttpResponseMessage getResponse = await _httpClient.GetAsync(apiUrl);
+
+    if (getResponse.IsSuccessStatusCode)
+    {
+        // Leitura e deserialização da resposta JSON
+        List<NewOrder> newOrders = await getResponse.ReadContentAs<List<NewOrder>>();
+        return newOrders;
+    }
+    else
+    {
+        Console.WriteLine($"Falha ao obter a lista de novos pedidos via API. Razão: {getResponse.ReasonPhrase}");
+        return null;
+    }
+}
+
+public async Task AddNewOrder2(ObjectId demandId, string observation, DateTime date)
+{
+    // Criação de um novo pedido
+    var newOrder = new NewOrder();
+    await _IrepositoryNewOrder.Add(newOrder);
+
+    // Exemplo de uso do método PostAsJson para enviar o novo pedido para um serviço web fictício
+    string apiUrl = "https://api.example.com/neworders";
+    HttpResponseMessage postResponse = await _httpClient.PostAsJson(apiUrl, newOrder);
+
+    if (postResponse.IsSuccessStatusCode)
+    {
+        // O pedido foi enviado com sucesso para o serviço web
+        Console.WriteLine("Novo pedido adicionado com sucesso via API.");
+    }
+    else
+    {
+        Console.WriteLine($"Falha ao adicionar novo pedido via API. Razão: {postResponse.ReasonPhrase}");
+    }
+
+    return;
+}*/

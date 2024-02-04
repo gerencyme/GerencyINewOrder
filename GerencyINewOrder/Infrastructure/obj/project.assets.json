@@ -2579,6 +2579,7 @@
       "Microsoft.EntityFrameworkCore >= 7.0.14",
       "MongoDB.Bson >= 2.23.1",
       "MongoDB.Driver >= 2.23.1",
+      "MongoDB.Driver.Core >= 2.23.1",
       "Swashbuckle.AspNetCore.Swagger >= 6.5.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 6.5.0",
       "Swashbuckle.AspNetCore.SwaggerUI >= 6.5.0",
@@ -2666,6 +2667,10 @@
             "version": "[2.23.1, )"
           },
           "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[2.23.1, )"
+          },
+          "MongoDB.Driver.Core": {
             "target": "Package",
             "version": "[2.23.1, )"
           },

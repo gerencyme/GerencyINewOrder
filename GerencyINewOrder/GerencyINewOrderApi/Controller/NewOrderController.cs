@@ -93,6 +93,25 @@ namespace Controllers
         }
 
         [Produces("application/json")]
+        [HttpPost("/api/GetOrdersByIsLiked")]
+        public async Task<IActionResult> GetOrdersByIsLiked([FromBody] CnpjView cnpj)
+        {
+            //var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            try
+            {
+
+                var returnGetOrdersByIsLiked = await _newOrderServices.GetOrdersByIsLiked(cnpj.CompanieCNPJ);
+                return Ok(returnGetOrdersByIsLiked);
+
+            }
+            catch (HttpStatusExceptionCustom ex)
+            {
+
+                return StatusCode(ex.StatusCode, ex.Message);
+            }
+        }
+
+        [Produces("application/json")]
         [HttpPost("/api/GetOrdersByDateRangeWithPagination")]
         public async Task<IActionResult> GetOrdersByDateRangeWithPagination([FromBody] GetOrderView getOrderView)
         {
@@ -192,6 +211,43 @@ namespace Controllers
                         if (register.CompanieCNPJ == userCNPJ)
                         {
                             var result = await _newOrderServices.UpdateNewOrder(register);
+                            return Ok(result);
+                        }
+
+                    }
+
+                    return BadRequest("usuário não encontrado");
+                }
+                catch (HttpStatusExceptionCustom ex)
+                {
+
+                    return StatusCode(ex.StatusCode, ex.Message);
+                }
+
+            }
+            catch (HttpStatusExceptionCustom ex)
+            {
+
+                return StatusCode(ex.StatusCode, ex.Message);
+            }
+        }
+
+        [Produces("application/json")]
+        [HttpPost("/api/UpdateIsLikedField")]
+        public async Task<IActionResult> UpdateIsLikedField([FromBody] UpdateIsLikedFieldView UpdateIsLikedFieldView)
+        {
+            var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            try
+            {
+                try
+                {
+
+                    if (userCNPJ != null)
+                    {
+
+                        if (UpdateIsLikedFieldView.CompanieCNPJ == userCNPJ)
+                        {
+                            var result = await _newOrderServices.UpdateIsLikedField(UpdateIsLikedFieldView.CompanieCNPJ, UpdateIsLikedFieldView.OrderId, UpdateIsLikedFieldView.IsLiked);
                             return Ok(result);
                         }
 

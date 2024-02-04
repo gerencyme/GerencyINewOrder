@@ -24,8 +24,5 @@ RUN dotnet publish "./GerencyINewOrderApi.csproj" -c $BUILD_CONFIGURATION -o /ap
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-<<<<<<< HEAD
+
 ENTRYPOINT ["dotnet", "GerencyINewOrderApi.dll"]
-=======
-ENTRYPOINT ["dotnet", "GerencyINewOrderApi.dll"]
->>>>>>> 201c3bfa856a475b44d62cb953c96532bf9bafb6

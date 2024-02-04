@@ -11,6 +11,8 @@ namespace Domain.Interfaces.IServices
 
         Task<NewOrderUpdateView> UpdateNewOrder(NewOrderUpdateView objeto);
 
+        Task<string> UpdateIsLikedField(string cnpj, string orderId, bool isLiked);
+
         Task<string> DeleteNewOrder(Guid idNewOrder);
 
         Task<NewOrder> GetByEntityId(Guid idNewOrder);
@@ -23,5 +25,6 @@ namespace Domain.Interfaces.IServices
 
         Task<List<OrderCardView>> GetOrdersByDateWithPagination(GetOrderView paginatiionNeworder);
 
+        Task<List<ProductIsByLikedView>> GetOrdersByIsLiked(string cnpj);
     }
 }
