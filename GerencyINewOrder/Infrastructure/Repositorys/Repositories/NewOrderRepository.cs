@@ -3,6 +3,7 @@ using Entities;
 using Entities.Entities;
 using Infrastructure.Configuration;
 using Infrastructure.Repository.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -13,12 +14,14 @@ namespace Infrastructure.Repository.Repositories
     public class NewOrderRepository : RepositoryMongoDBGeneric<NewOrder>, IRepositoryNewOrder
     {
         private readonly IMongoCollection<NewOrder> _collection;
+        private readonly IClientSessionHandle _session;
 
         public NewOrderRepository(IOptions<MongoDbSettings> settings) : base(settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             var database = client.GetDatabase(settings.Value.DatabaseName);
             _collection = database.GetCollection<NewOrder>(typeof(NewOrder).Name);
+            _session = client.StartSession();
         }
 
         private const string CNPJ = "CompanieCNPJ";
@@ -44,47 +47,51 @@ namespace Infrastructure.Repository.Repositories
             }
         }
 
-        /*public async Task UpdateNewOrderByIsLiked(Guid orderId)
+        public async Task<string> UpdateIsLikedField(string cnpj, Guid orderId, bool isLiked)
         {
-            var filter = Builders<NewOrder>.Filter.Eq(ORDERID, orderId);
-            var existingEntity = await _collection.Find(filter).FirstOrDefaultAsync();
-
-            if (existingEntity != null)
             {
-                existingEntity.IsLiked = true;
-                await _collection.ReplaceOneAsync(filter, existingEntity);
-            }
-            else
-            {
-                // Lógica para lidar com o caso em que a entidade não foi encontrada
-                // Você pode lançar uma exceção, fazer algo diferente, etc.
-                // Neste exemplo, estou apenas registrando uma mensagem.
-                Console.WriteLine($"Entidade com OrderId {orderId} não encontrada.");
-            }
-        }*/
-
-        public async Task<string> UpdateIsLikedField(string cnpj, string orderId, bool isLiked)
-        {
-            try
-            {
-                var filter = Builders<NewOrder>.Filter.And(
-                                            Builders<NewOrder>.Filter.Eq(CNPJ, cnpj),
-                                            Builders<NewOrder>.Filter.Eq(ORDERID, orderId));
-
-                var update = Builders<NewOrder>.Update.Set("IsLiked", isLiked);
-
-                var result = await _collection.UpdateOneAsync(filter, update);
-                if (result.MatchedCount == 0)
+                try
                 {
-                    // Tratar o caso em que nenhum documento foi encontrado
-                    throw new Exception($"Entidade com OrderId {orderId} não encontrada.");
-                }
+                    _session.StartTransaction();
 
-                return "Update IsLiked Accepted!";
-            }
-            catch (Exception)
-            {
-                throw new Exception();
+                    var filter = Builders<NewOrder>.Filter.And(
+                        Builders<NewOrder>.Filter.Eq(CNPJ, cnpj),
+                        Builders<NewOrder>.Filter.Eq("OrderId", orderId)
+                    );
+
+                    var order = await _collection.Find(filter).FirstOrDefaultAsync();
+                    if (order == null)
+                    {
+                        throw new Exception($"Entidade com OrderId {orderId} não encontrada.");
+                    }
+
+                    var product = order.Product;
+
+                    var update = Builders<NewOrder>.Update
+                        .Set("IsLiked", isLiked);
+
+                    var result = await _collection.UpdateManyAsync(
+                        Builders<NewOrder>.Filter.And(
+                            Builders<NewOrder>.Filter.Eq(CNPJ, cnpj),
+                            Builders<NewOrder>.Filter.Eq("Product.ProductName", product.ProductName)
+                        ),
+                        update
+                    );
+
+                    if (result.MatchedCount == 0)
+                    {
+                        throw new Exception($"Nenhum documento encontrado para a atualização.");
+                    }
+
+                    await _session.CommitTransactionAsync();
+
+                    return $"Update {result.MatchedCount} IsLiked!";
+                }
+                catch (Exception)
+                {
+                    await _session.AbortTransactionAsync();
+                    throw new Exception("Erro ao atualizar IsLiked. Todas as atualizações foram revertidas.");
+                }
             }
         }
 

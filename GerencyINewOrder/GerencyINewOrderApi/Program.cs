@@ -11,17 +11,36 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string descriptionText = File.ReadAllText("docs/gerencyl_new_order_api.txt");
+//string descriptionText = File.ReadAllText("docs/TextFile.txt");
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
+builder.Services.AddLogging();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "GerencyI New Order", Version = "v1" });
+    c.SwaggerDoc("v1",
+        new OpenApiInfo {
+            Title = "GerencyI New Order",
+            Version = "v1",
+            Description = descriptionText,
+            Contact = new OpenApiContact
+            {
+                Name = "Contact",
+                Url = new Uri("https://gerencyi.com")
+            },
+            /*License = new OpenApiLicense
+            {
+                Name = "Example License",
+                Url = new Uri("https://example.com/license")
+            }*/
+        });
 
     // Configuração para autenticação com Bearer Token
     var securityScheme = new OpenApiSecurityScheme
@@ -53,16 +72,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
           var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
           option.TokenValidationParameters = new TokenValidationParameters
           {
-              ValidateIssuer = false,
-              ValidateAudience = false,
+              ValidateIssuer = true,
+              ValidateAudience = true,
               ValidateLifetime = true,
               ValidateIssuerSigningKey = true,
-
               ValidIssuer = jwtSettings.Issuer,
               ValidAudience = jwtSettings.Audience,
               IssuerSigningKey = JwtSecurityKey.Create(jwtSettings.SecurityKey)
           };
-
           option.Events = new JwtBearerEvents
           {
               OnAuthenticationFailed = context =>
@@ -70,29 +87,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   Console.WriteLine("OnAuthenticationFailed: " + context.Exception.Message);
                   return Task.CompletedTask;
               },
-              OnTokenValidated = async context =>
+              OnTokenValidated = context =>
               {
-                  var isRefreshTokenClaim = context.Principal.Claims.FirstOrDefault(c => c.Type == "refresh_token")?.Value;
-                  if (!string.IsNullOrEmpty(isRefreshTokenClaim) && isRefreshTokenClaim.ToLower() == "true")
-                  {
-                      // Se é um Refresh Token, use a lógica da classe TokenJWTBuilder para gerar um novo Access Token
-                      var jwtBuilder = new TokenJWTBuilder()
-                          .AddSecurityKey(JwtSecurityKey.Create(jwtSettings.SecurityKey))
-                          .AddIssuer(jwtSettings.Issuer)
-                          .AddAudience(jwtSettings.Audience)
-                          .AddSubject("novousuario@exemplo.com") // Substitua pelo sub do usuário real
-                          .WithExpiration(jwtSettings.TokenExpirationMinutes)
-                          .Builder();
-
-                      // Acessa diretamente a propriedade Response para substituir o token na resposta
-                      context.HttpContext.Response.Headers.Add("new-access-token", jwtBuilder.Value);
-                  }
-
                   Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
-                  await Task.CompletedTask;
-              },
+                  return Task.CompletedTask;
+              }
           };
-
       });
 
 var serviceConfig = new DIServices();

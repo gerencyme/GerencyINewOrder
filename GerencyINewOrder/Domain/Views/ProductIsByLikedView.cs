@@ -11,7 +11,7 @@ namespace Domain.Views
         public string ProductBrand { get; set; }
         public string ProductType { get; set; }
         public int CountStatusUnderAnalise { get; set; }
-        public int CountStatusAnalise { get; set; }
-        public int CountStatusCnacel { get; set; }
+        public int CountStatusDone { get; set; }
+        public int CountStatusCancel { get; set; }
     }
 }

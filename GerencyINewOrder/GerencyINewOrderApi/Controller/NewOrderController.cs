@@ -50,7 +50,7 @@ namespace Controllers
 
         [Produces("application/json")]
         [HttpPost("/api/GetAllNewOrder")]
-        public async Task<IActionResult> GetGetAllNewOrderAll()
+        public async Task<IActionResult> GetAllNewOrderAll()
         {
             try
             {
@@ -96,13 +96,15 @@ namespace Controllers
         [HttpPost("/api/GetOrdersByIsLiked")]
         public async Task<IActionResult> GetOrdersByIsLiked([FromBody] CnpjView cnpj)
         {
-            //var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             try
             {
-
-                var returnGetOrdersByIsLiked = await _newOrderServices.GetOrdersByIsLiked(cnpj.CompanieCNPJ);
-                return Ok(returnGetOrdersByIsLiked);
-
+                if (userCNPJ != null)
+                {
+                    var returnGetOrdersByIsLiked = await _newOrderServices.GetOrdersByIsLiked(cnpj.CompanieCNPJ);
+                    return Ok(returnGetOrdersByIsLiked);
+                }
+                return BadRequest("usuário não encontrado");
             }
             catch (HttpStatusExceptionCustom ex)
             {
@@ -237,36 +239,40 @@ namespace Controllers
         public async Task<IActionResult> UpdateIsLikedField([FromBody] UpdateIsLikedFieldView UpdateIsLikedFieldView)
         {
             var userCNPJ = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             try
             {
-                try
+
+                if (userCNPJ != null)
                 {
 
-                    if (userCNPJ != null)
+                    if (Guid.TryParse(UpdateIsLikedFieldView.OrderId, out Guid orderId))
                     {
+                        // A conversão foi bem-sucedida, você pode usar 'orderId' como um Guid
+                        var result = await _newOrderServices.UpdateIsLikedField(
+                            UpdateIsLikedFieldView.CompanieCNPJ,
+                            orderId,
+                            UpdateIsLikedFieldView.IsLiked
+                        );
 
-                        if (UpdateIsLikedFieldView.CompanieCNPJ == userCNPJ)
-                        {
-                            var result = await _newOrderServices.UpdateIsLikedField(UpdateIsLikedFieldView.CompanieCNPJ, UpdateIsLikedFieldView.OrderId, UpdateIsLikedFieldView.IsLiked);
-                            return Ok(result);
-                        }
-
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        // A 'string' não é um Guid válido, trate o erro conforme necessário
+                        Console.WriteLine("UpdateIsLikedFieldView.OrderId não é um Guid válido.");
                     }
 
-                    return BadRequest("usuário não encontrado");
-                }
-                catch (HttpStatusExceptionCustom ex)
-                {
-
-                    return StatusCode(ex.StatusCode, ex.Message);
                 }
 
+                return BadRequest("usuário não encontrado");
             }
             catch (HttpStatusExceptionCustom ex)
             {
 
                 return StatusCode(ex.StatusCode, ex.Message);
             }
+
         }
 
         [Produces("application/json")]

@@ -106,13 +106,13 @@ namespace Domain.Services
             return objeto;
         }
 
-        public async Task<string> UpdateIsLikedField(string cnpj, string orderId, bool isLiked)
+        public async Task<string> UpdateIsLikedField(string cnpj, Guid orderId, bool isLiked)
         {
             if (string.IsNullOrWhiteSpace(cnpj))
             {
                 throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "CNPJ é obrigatório.");
             }
-            if (string.IsNullOrWhiteSpace(orderId))
+            if (string.IsNullOrWhiteSpace(orderId.ToString()))
             {
                 throw new HttpStatusExceptionCustom(StatusCodeEnum.NotAcceptable, "Order Id é obrigatório.");
             }
@@ -154,18 +154,18 @@ namespace Domain.Services
             var listOrders = await _IrepositoryNewOrder.GetOrdersByIsLiked(cnpj, isLiked);
 
             int countStatusUnderAnalise = 0;
-            int countStatusAnalise = 0;
-            int countStatusCnacel = 0;
+            int countStatusDone = 0;
+            int countStatusCancel = 0;
 
             
-            List<ProductIsByLikedView> listProductsByLiked2 = new List<ProductIsByLikedView>();
+            List<ProductIsByLikedView> listProductsByLiked = new List<ProductIsByLikedView>();
 
             foreach (var order in listOrders)
             {
                 string nameProduct = order.Product.ProductName;
 
                 // Verifica se o produto já está na lista
-                ProductIsByLikedView productIsByLiked = listProductsByLiked2.FirstOrDefault(x => x.ProductName == nameProduct);
+                ProductIsByLikedView productIsByLiked = listProductsByLiked.FirstOrDefault(x => x.ProductName == nameProduct);
 
                 if (productIsByLiked == null)
                 {
@@ -180,11 +180,11 @@ namespace Domain.Services
                         ProductBrand = order.Product.ProductBrand,
                         ProductType = order.Product.ProductType,
                         CountStatusUnderAnalise = 0,
-                        CountStatusAnalise = 0,
-                        CountStatusCnacel = 0
+                        CountStatusDone = 0,
+                        CountStatusCancel = 0
                     };
 
-                    listProductsByLiked2.Add(productIsByLiked);
+                    listProductsByLiked.Add(productIsByLiked);
                 }
 
                 // Atualiza o contador do status apropriado
@@ -194,15 +194,15 @@ namespace Domain.Services
                         productIsByLiked.CountStatusUnderAnalise++;
                         break;
                     case done:
-                        productIsByLiked.CountStatusAnalise++;
+                        productIsByLiked.CountStatusDone++;
                         break;
                     case cancel:
-                        productIsByLiked.CountStatusCnacel++;
+                        productIsByLiked.CountStatusCancel++;
                         break;
                 }
             }
 
-            return listProductsByLiked2;
+            return listProductsByLiked;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Domain.Interfaces.IServices
 
         Task<NewOrderUpdateView> UpdateNewOrder(NewOrderUpdateView objeto);
 
-        Task<string> UpdateIsLikedField(string cnpj, string orderId, bool isLiked);
+        Task<string> UpdateIsLikedField(string cnpj, Guid orderId, bool isLiked);
 
         Task<string> DeleteNewOrder(Guid idNewOrder);
 
