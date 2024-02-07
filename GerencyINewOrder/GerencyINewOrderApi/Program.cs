@@ -14,8 +14,8 @@ using MongoDB.Driver;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-string descriptionText = File.ReadAllText("docs/gerencyl_new_order_api.txt");
-//string descriptionText = File.ReadAllText("docs/TextFile.txt");
+//string descriptionText = File.ReadAllText("docs/gerencyl_new_order_api.txt");
+string descricao = "A API Gerencyl New Order é uma ferramenta poderosa que permite aos usuários gerenciar seus pedidos de forma eficiente e eficaz. Ela oferece uma variedade de recursos que facilitam o processo de criação, atualização e acompanhamento de pedidos.\r\n\r\nFuncionalidades:\r\n\r\nCriar novos pedidos: A API fornece um método simples para criar novos pedidos, incluindo informações como cliente, produtos, quantidade e valor total.\r\nAtualizar pedidos existentes: Você pode facilmente atualizar os detalhes de um pedido existente, como status, data de entrega ou informações de pagamento.\r\nObter pedidos: A API oferece vários métodos para recuperar pedidos, incluindo por ID, data, status ou cliente.\r\nFiltrar pedidos: Você pode filtrar os pedidos por diversos critérios para encontrar rapidamente as informações que precisa.\r\nExcluir pedidos: A API permite excluir pedidos que não são mais necessários.\r\nBenefícios:\r\n\r\nEficiência: A API automatiza o processo de gerenciamento de pedidos, economizando tempo e recursos.\r\nPrecisão: A API ajuda a reduzir erros humanos na entrada de dados.\r\nVisibilidade: A API fornece uma visão geral completa de todos os seus pedidos em um só lugar.\r\nEscalabilidade: A API pode ser facilmente dimensionada para atender às necessidades do seu negócio.\r\nCasos de uso:\r\n\r\nLojas online: A API pode ser usada para gerenciar pedidos feitos em uma loja online.\r\nSistemas de ERP: A API pode ser integrada a um sistema de ERP para centralizar o gerenciamento de pedidos.\r\nAplicativos móveis: A API pode ser usada para criar aplicativos móveis para gerenciar pedidos em tempo real.\r\nDocumentação:\r\n\r\nA documentação completa da API Gerencyl New Order está disponível em: [Documentação Gerencyi](https://www.gerencyi.com/)\r\n\r\nSuporte:\r\n\r\nSe você tiver alguma dúvida ou precisar de ajuda para usar a API, entre em contato com o suporte da Gerencyl em: [Suporte Gerencyi](https://www.gerencyi.com/)\r\n\r\nObservações:\r\n\r\nA API Gerencyl New Order é um serviço pago.\r\nVocê precisa de uma conta Gerencyl para usar a API.\r\n\r\nOutras Apis:\r\n\r\n[Gerencyi Autenticação](https://gerencyiauthentication.azurewebsites.net/)\r\n\r\n[Gerencyi Gateway](https://gerencyigateway.azurewebsites.net/)";
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
         new OpenApiInfo {
             Title = "GerencyI New Order",
             Version = "v1",
-            Description = descriptionText,
+            Description = descricao,
             Contact = new OpenApiContact
             {
                 Name = "Contact",

@@ -5,42 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\docs\\gerencyl_new_order_api.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\docs\\gerencyl_new_order_api.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\docs\\gerencyl_new_order_api - copy.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\docs\\gerencyl_new_order_api - copy.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\gerencyineworderapi\\controller\\newordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F43CF03-4597-43D5-BC9B-376DE31A587D}|GerencyINewOrderApi\\GerencyINewOrderApi.csproj|solutionrelative:gerencyineworderapi\\controller\\newordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\domain\\services\\neworderservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|solutionrelative:domain\\services\\neworderservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAC8AE4C-7B20-466C-A7D9-B8ABCAD94A68}|Infrastructure\\Infrastructure.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\infrastructure\\repositorys\\repositories\\neworderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAC8AE4C-7B20-466C-A7D9-B8ABCAD94A68}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositorys\\repositories\\neworderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\domain\\views\\updateislikedfieldview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|solutionrelative:domain\\views\\updateislikedfieldview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\domain\\views\\productisbylikedview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|solutionrelative:domain\\views\\productisbylikedview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\domain\\interfaces\\irepositorys\\irepositoryneworder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\irepositorys\\irepositoryneworder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|c:\\projetos\\gerencyl\\gerencyineworder\\gerencyineworder\\domain\\interfaces\\iservices\\ineworderservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D120BE4-CDA7-44B6-BC85-D910924B517E}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\iservices\\ineworderservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,37 +14,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "gerencyl_new_order_api - Copy.txt",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\docs\\gerencyl_new_order_api - Copy.txt",
-              "RelativeDocumentMoniker": "GerencyINewOrderApi\\docs\\gerencyl_new_order_api - Copy.txt",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\docs\\gerencyl_new_order_api - Copy.txt",
-              "RelativeToolTip": "GerencyINewOrderApi\\docs\\gerencyl_new_order_api - Copy.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAB3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-02-06T23:03:49.299Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "gerencyl_new_order_api.txt",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\docs\\gerencyl_new_order_api.txt",
-              "RelativeDocumentMoniker": "GerencyINewOrderApi\\docs\\gerencyl_new_order_api.txt",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\docs\\gerencyl_new_order_api.txt",
-              "RelativeToolTip": "GerencyINewOrderApi\\docs\\gerencyl_new_order_api.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-02-06T22:48:01.822Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -90,94 +28,10 @@
               "RelativeDocumentMoniker": "GerencyINewOrderApi\\Program.cs",
               "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Program.cs",
               "RelativeToolTip": "GerencyINewOrderApi\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABNAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-04T07:35:33.214Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UpdateIsLikedFieldView.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Views\\UpdateIsLikedFieldView.cs",
-              "RelativeDocumentMoniker": "Domain\\Views\\UpdateIsLikedFieldView.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Views\\UpdateIsLikedFieldView.cs",
-              "RelativeToolTip": "Domain\\Views\\UpdateIsLikedFieldView.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-03T23:32:55.581Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "NewOrderServices.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Services\\NewOrderServices.cs",
-              "RelativeDocumentMoniker": "Domain\\Services\\NewOrderServices.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Services\\NewOrderServices.cs",
-              "RelativeToolTip": "Domain\\Services\\NewOrderServices.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-03T23:18:26.646Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NewOrderController.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "RelativeDocumentMoniker": "GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "RelativeToolTip": "GerencyINewOrderApi\\Controller\\NewOrderController.cs",
-              "ViewState": "AQIAABwBAAAAAAAAAAAswIUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-01T00:16:32.21Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductIsByLikedView.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Views\\ProductIsByLikedView.cs",
-              "RelativeDocumentMoniker": "Domain\\Views\\ProductIsByLikedView.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Views\\ProductIsByLikedView.cs",
-              "RelativeToolTip": "Domain\\Views\\ProductIsByLikedView.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-01T00:02:19.048Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "INewOrderServices.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Interfaces\\IServices\\INewOrderServices.cs",
-              "RelativeDocumentMoniker": "Domain\\Interfaces\\IServices\\INewOrderServices.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Interfaces\\IServices\\INewOrderServices.cs",
-              "RelativeToolTip": "Domain\\Interfaces\\IServices\\INewOrderServices.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA0AAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-31T22:29:22.433Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NewOrderRepository.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Infrastructure\\Repositorys\\Repositories\\NewOrderRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositorys\\Repositories\\NewOrderRepository.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Infrastructure\\Repositorys\\Repositories\\NewOrderRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositorys\\Repositories\\NewOrderRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-31T22:23:32.523Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IRepositoryNewOrder.cs",
-              "DocumentMoniker": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "RelativeDocumentMoniker": "Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "ToolTip": "C:\\Projetos\\Gerencyl\\GerencyINewOrder\\GerencyINewOrder\\Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "RelativeToolTip": "Domain\\Interfaces\\IRepositorys\\IRepositoryNewOrder.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-31T22:29:15.042Z"
             }
           ]
         }

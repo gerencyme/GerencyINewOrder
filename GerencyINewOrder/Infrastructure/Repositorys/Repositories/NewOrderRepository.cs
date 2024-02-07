@@ -3,7 +3,6 @@ using Entities;
 using Entities.Entities;
 using Infrastructure.Configuration;
 using Infrastructure.Repository.Generic;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
